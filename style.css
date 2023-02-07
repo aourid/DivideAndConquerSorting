@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+body {
+  background: linear-gradient(to right, rgb(206, 83, 225), rgb(11, 40, 225));
+  /* background-color: rgb(209, 212, 212); */
+  font-family: "poppins", sans-serif;
+  color: rgb(21, 22, 21);
+  opacity: 0.95;
+}
+.container {
+  background-color: rgb(221, 240, 241);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%;
+}
+
+h1 {
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+h2 {
+  letter-spacing: 0.3em;
+}
+
+/* .generateBTN {
+  padding: 0.2em 0.2em;
+  font-size: 0.8em;
+  background-color: rgb(228, 217, 93);
+  cursor: pointer;
+  font-family: "Verdana", Tahoma, Geneva, sans-serif;
+} */
+
+.inputholder {
+  padding: 1.2em 0.5em;
+  cursor: pointer;
+  /* border-radius: 0.8em; */
+  border: none;
+  background-color: rgb(242, 224, 224);
+  width: 120px;
+}
+
+.inputholder::placeholder {
+  color: #8e8d8d;
+}
+
+.inputdata {
+  padding: 50px;
+  width: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.sortList {
+  padding: 50px;
+  width: auto;
+  /* height: 50px;  */
+  /* width: 500px; */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.sortBTN,
+.generateBTN {
+  border: none;
+  border-radius: 2em;
+  color: rgb(32, 33, 32);
+  background-color: rgb(86, 226, 245);
+  font-size: 1rem;
+  padding: 1rem 1rem;
+  cursor: pointer;
+  letter-spacing: 0.3em;
+  font-family: "Verdana", Tahoma, Geneva, sans-serif;
+}
