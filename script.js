@@ -17,6 +17,9 @@ const inputholderElement = document.querySelector(".inputholder");
 const sortBTNElement = document.querySelector(".sortBTN");
 const sortListElement = document.querySelector(".sortList");
 
+const nb_comparisonElement = document.querySelector(".nb_comparison");
+const nb_swapElement = document.querySelector(".nb_swap");
+
 //input the size of the List
 inputholderElement.addEventListener("click", () => {
   // console.log(inputholderElement.value);
@@ -47,14 +50,17 @@ sortBTNElement.addEventListener("click", () => {
   // console.log("edit the element of array", inputdataElement.textContent);
   // let arr = inputdataElement.textContent.slice(13); //remove the first string: Random...
   let arr = inputdataElement.value; //remove the first string: Random...
+  let sortedArray = [];
 
   console.log("Array to sort: ", arr, typeof arr);
   // console.log("pad first part", arr.slice(13));
   console.log("array now:", Array.of(arr));
 
   console.log("****************************************");
-
-  sortListElement.textContent = sortArray(arr);
+  sortedArray = sortArray(arr);
+  sortListElement.textContent = sortedArray.arr;
+  nb_comparisonElement.textContent = sortedArray.numberComparison;
+  nb_swapElement.textContent = sortedArray.numberSwap;
   console.log(sortListElement.textContent);
 });
 
@@ -92,7 +98,7 @@ function sortArray(arr) {
       numberSwap + numberComparison
     }`
   );
-  return arr;
+  return { arr, numberSwap, numberComparison };
 }
 
 /////////////////////////////////////////////////////////////////////////

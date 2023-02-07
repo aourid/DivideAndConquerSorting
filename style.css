@@ -75,3 +75,9 @@ h2 {
   letter-spacing: 0.3em;
   font-family: "Verdana", Tahoma, Geneva, sans-serif;
 }
+
+small {
+  color: #fc0b0b;
+  margin-bottom: 3rem;
+  text-align: center;
+}
