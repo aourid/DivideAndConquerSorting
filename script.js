@@ -17,8 +17,9 @@ const inputholderElement = document.querySelector(".inputholder");
 const sortBTNElement = document.querySelector(".sortBTN");
 const sortListElement = document.querySelector(".sortList");
 
-const nb_comparisonElement = document.querySelector(".nb_comparison");
-const nb_swapElement = document.querySelector(".nb_swap");
+const nb_comparisonElement = document.querySelector(".comparison");
+const nb_swapElement = document.querySelector(".swap");
+const nb_operationElement = document.querySelector(".operation");
 
 //input the size of the List
 inputholderElement.addEventListener("click", () => {
@@ -61,6 +62,8 @@ sortBTNElement.addEventListener("click", () => {
   sortListElement.textContent = sortedArray.arr;
   nb_comparisonElement.textContent = sortedArray.numberComparison;
   nb_swapElement.textContent = sortedArray.numberSwap;
+  nb_operationElement.textContent =
+    Number(sortedArray.numberComparison) + Number(sortedArray.numberSwap);
   console.log(sortListElement.textContent);
 });
 
