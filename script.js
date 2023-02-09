@@ -20,6 +20,10 @@ const sortListElement = document.querySelector(".sortList");
 const nb_comparisonElement = document.querySelector(".comparison");
 const nb_swapElement = document.querySelector(".swap");
 const nb_operationElement = document.querySelector(".operation");
+const nb_comparisonMethod2Element =
+  document.querySelector(".comparisonMethod2");
+const nb_swapMethod2Element = document.querySelector(".swapMethod2");
+const nb_operationMethod2Element = document.querySelector(".operationMethod2");
 
 //input the size of the List
 inputholderElement.addEventListener("click", () => {
@@ -31,30 +35,22 @@ inputholderElement.addEventListener("click", () => {
     let arrayElement = generateRandomArray(listSize);
     console.log("array element type:", arrayElement, typeof arrayElement);
     for (let i = 0; i < arrayElement.length; i++) {
-      console.log(`a(${i}) = ${a[i]}`);
+      console.log(`a(${i}) = ${arrayElement[i]}`);
     }
     // inputdataElement.textContent = `Random List = [${arrayElement}]`;
     // inputdataElement.textContent = arrayElement;
     inputdataElement.value = arrayElement;
     inputdataElement.textContent = arrayElement;
     console.log("..... Finally this element", inputdataElement.value);
-
-    // divideBTNElement.addEventListener("click", () => {
-    //   sortListElement.textContent = arrDivide(arrayElement, 3);
-    // });
   });
 });
 
 sortBTNElement.addEventListener("click", () => {
-  console.log("****************************************");
-  console.log("I will sort them on few moment");
-  // console.log("edit the element of array", inputdataElement.textContent);
-  // let arr = inputdataElement.textContent.slice(13); //remove the first string: Random...
-  let arr = inputdataElement.value; //remove the first string: Random...
+  let arr = inputdataElement.value;
+  let arrCopy = [...inputdataElement.value];
   let sortedArray = [];
 
   console.log("Array to sort: ", arr, typeof arr);
-  // console.log("pad first part", arr.slice(13));
   console.log("array now:", Array.of(arr));
 
   console.log("****************************************");
@@ -65,13 +61,21 @@ sortBTNElement.addEventListener("click", () => {
   nb_operationElement.textContent =
     Number(sortedArray.numberComparison) + Number(sortedArray.numberSwap);
   console.log(sortListElement.textContent);
-});
 
-// generateElement.addEventListener("click", () => {
-//   console.log("Generate a random list");
-//   // console.log(generateRandomArray(10));
-//   inputdataElement.textContent = `[${generateRandomArray(10)}]`;
-// });
+  //add the new sorting method here:
+  let sortedArrayBySecondMethod = [];
+  console.log("****************************************");
+  console.log("Start Second Method");
+  console.log("Copy of the array:", Array.of(arrCopy));
+  sortedArrayBySecondMethod = sortArrayBasedOnMinInsertion(arrCopy);
+  console.log("sorted copy 2end Method: ", sortedArrayBySecondMethod);
+  nb_comparisonMethod2Element.textContent =
+    sortedArrayBySecondMethod.numberComparison;
+  nb_swapMethod2Element.textContent = sortedArrayBySecondMethod.numberSwap;
+  nb_operationMethod2Element.textContent =
+    Number(sortedArrayBySecondMethod.numberComparison) +
+    Number(sortedArrayBySecondMethod.numberSwap);
+});
 
 /////////////////////////////////////////////////////////////////////////
 // Method 1: Sort an Array, by swaping between a Pivot and any number less
@@ -90,7 +94,6 @@ function sortArray(arr) {
         arr[pivot] = arr[i];
         arr[i] = tmp;
         numberSwap++;
-        // console.log("after swap: ", arr[pivot], " --> ", arr[i]);
       } else numberComparison++;
     }
   }
@@ -141,7 +144,7 @@ function sortArrayBasedOnMinInsertion(arr) {
       numberSwap + numberComparison
     }`
   );
-  return arr;
+  return { arr, numberSwap, numberComparison };
 }
 
 function swap(a, b) {
@@ -158,7 +161,7 @@ function generateRandomArray(n) {
 }
 
 function mergeArrays(a, b) {
-  //if a and b are sorted, then not necessarily to sort them again
+  // a and b has to be sorted before starting to merge
   // console.log(
   //   "a: ",
   //   a.sort(function (a, b) {
