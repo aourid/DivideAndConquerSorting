@@ -12,9 +12,13 @@
 ////****************************************************************************//
 
 const inputdataElement = document.querySelector(".inputdata");
-const generateElement = document.querySelector(".generateBTN");
 const inputholderElement = document.querySelector(".inputholder");
+const divideInputDataElement = document.querySelector(".dividedata");
+const subarraySizeElement = document.querySelector(".subarraySize");
+
+const generateElement = document.querySelector(".generateBTN");
 const sortBTNElement = document.querySelector(".sortBTN");
+const divideBTNElement = document.querySelector(".divideBTN");
 const sortListElement = document.querySelector(".sortList");
 
 const nb_comparisonElement = document.querySelector(".comparison");
@@ -25,6 +29,11 @@ const nb_comparisonMethod2Element =
 const nb_swapMethod2Element = document.querySelector(".swapMethod2");
 const nb_operationMethod2Element = document.querySelector(".operationMethod2");
 
+const nb_comparisonMethod3Element =
+  document.querySelector(".comparisonMethod3");
+const nb_swapMethod3Element = document.querySelector(".swapMethod3");
+const nb_operationMethod3Element = document.querySelector(".operationMethod3");
+
 //input the size of the List
 inputholderElement.addEventListener("click", () => {
   // console.log(inputholderElement.value);
@@ -34,14 +43,13 @@ inputholderElement.addEventListener("click", () => {
     console.log("Generate a random list");
     let arrayElement = generateRandomArray(listSize);
     console.log("array element type:", arrayElement, typeof arrayElement);
-    for (let i = 0; i < arrayElement.length; i++) {
-      console.log(`a(${i}) = ${arrayElement[i]}`);
-    }
-    // inputdataElement.textContent = `Random List = [${arrayElement}]`;
-    // inputdataElement.textContent = arrayElement;
+    // for (let i = 0; i < arrayElement.length; i++) {
+    //   console.log(`a(${i}) = ${arrayElement[i]}`);
+    // }
     inputdataElement.value = arrayElement;
     inputdataElement.textContent = arrayElement;
     console.log("..... Finally this element", inputdataElement.value);
+    divideInputDataElement.value = [...arrayElement];
   });
 });
 
@@ -69,12 +77,62 @@ sortBTNElement.addEventListener("click", () => {
   console.log("Copy of the array:", Array.of(arrCopy));
   sortedArrayBySecondMethod = sortArrayBasedOnMinInsertion(arrCopy);
   console.log("sorted copy 2end Method: ", sortedArrayBySecondMethod);
+
   nb_comparisonMethod2Element.textContent =
     sortedArrayBySecondMethod.numberComparison;
   nb_swapMethod2Element.textContent = sortedArrayBySecondMethod.numberSwap;
   nb_operationMethod2Element.textContent =
     Number(sortedArrayBySecondMethod.numberComparison) +
     Number(sortedArrayBySecondMethod.numberSwap);
+});
+
+divideBTNElement.addEventListener("click", () => {
+  // let arrayOriginal = [...inputdataElement.value];
+  console.log("---------------------***********----------------------------");
+  console.log("Original array: ", divideInputDataElement.value);
+  let subarraysize = Number(subarraySizeElement.value);
+  let dividedArray = arrDivide(divideInputDataElement.value, subarraysize);
+  console.log("Divide the Array", dividedArray);
+  console.log(
+    "################## S O R T  E A C H  S U B  A R R A Y ########################"
+  );
+  let numberOfsubarrays = dividedArray.length;
+  let totalSwap = 0;
+  let totalComparison = 0;
+  let tmpArr = {};
+  for (let i = 0; i < numberOfsubarrays; i++) {
+    console.log(` ..... sort of sub arrays:${i} , ${dividedArray[i]}`);
+    tmpArr = sortArray(dividedArray[i]);
+    totalSwap += tmpArr.numberSwap;
+    totalComparison += tmpArr.numberComparison;
+    console.log(
+      "    -->  Info of sub subarray:",
+      tmpArr.numberSwap,
+      tmpArr.numberComparison
+    );
+  }
+  console.log("Sub arrays after sorting", dividedArray);
+  console.log(
+    `   Total swap: ${totalSwap}, total Comparison: ${totalComparison}`
+  );
+
+  nb_comparisonMethod3Element.textContent = totalComparison;
+  nb_swapMethod3Element.textContent = totalSwap;
+  nb_operationMethod3Element.textContent =
+    Number(totalComparison) + Number(totalSwap);
+
+  //To complete: Merge has tobe done with a click of merge
+
+  let constructedArray = "[";
+  let mergeSubLists = [];
+  for (let i = 0; i < dividedArray.length; i++) {
+    console.log(`Element N: ${i}:`, dividedArray[i]);
+    // print(dividedArray[i]);
+    constructedArray += `[${dividedArray[i]}],`;
+    mergeSubLists = mergeArrays(mergeSubLists, dividedArray[i]);
+  }
+  divideInputDataElement.textContent = constructedArray + "]";
+  console.log(mergeSubLists);
 });
 
 /////////////////////////////////////////////////////////////////////////

@@ -36,13 +36,19 @@ So, $T_n$ will be approximately equivalent to: $$T_n \approx \sum_{s} ^{N}k = N.
 
 ### Merge function
 
-Once all sub arrays are sorted, then we merge them one by one to reconstruct the sorted array. To merge 2 sub arrays $a$ and $b$, we take the min (a[0], b[0]) as the first element and we remove from its correspondig sub array, and we repeat the process.
+Once all sub arrays are sorted, then we merge them one by one to reconstruct the sorted array. The merge function of 2 sub arrays $a$ and $b$, is performed as follows:
+
+**_c = merge(a, b):_**
+
+- Take $ c[k] = min(a[0], b[0])$,
+- remove it from its correspondig sub array (a or b),
+- Repeat the process until a or b is empty
 
 #### Example:
 
-c = merge(a, b)
+$c = merge(a, b)$
 
-where: a = [1, 3, 5, 6], b = [2, 3, 4, 5]
+where: $a = [1, 3, 5, 6]$ , $b = [2, 3, 4, 5]$
 
 $$min(a[0], b[0]) = min(1, 2) = 1 $$
 we append 1 in c and we remove it from a

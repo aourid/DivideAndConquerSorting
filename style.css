@@ -25,7 +25,8 @@ h2 {
   font-size: 0.9rem;
 }
 
-.inputholder {
+.inputholder,
+.subarraySize {
   padding: 1.2em 0.5em;
   cursor: pointer;
   /* border-radius: 0.8em; */
@@ -34,7 +35,8 @@ h2 {
   width: 120px;
 }
 
-.inputholder::placeholder {
+.inputholder::placeholder,
+.subarraySize::placeholder {
   color: #8e8d8d;
 }
 
@@ -55,7 +57,8 @@ h2 {
 }
 
 .sortBTN,
-.generateBTN {
+.generateBTN,
+.divideBTN {
   border: none;
   border-radius: 2em;
   color: rgb(32, 33, 32);
@@ -68,11 +71,13 @@ h2 {
 }
 
 .sortBTN:hover,
-.generateBTN:hover {
+.generateBTN:hover,
+.divideBTN:hover {
   font-size: 1rem;
   background-color: rgb(35, 70, 75);
   color: antiquewhite;
 }
+
 .method {
   display: flex;
 }
