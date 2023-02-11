@@ -40,7 +40,7 @@ Once all sub arrays are sorted, then we merge them one by one to reconstruct the
 
 **_c = merge(a, b):_**
 
-- Take $ c[k] = min(a[0], b[0])$,
+- Take $c[k] = min(a[0], b[0])$,
 - remove it from its correspondig sub array (a or b),
 - Repeat the process until a or b is empty
 
