@@ -36,27 +36,22 @@ const nb_comparisonMethod3Element =
 const nb_swapMethod3Element = document.querySelector(".swapMethod3");
 const nb_operationMethod3Element = document.querySelector(".operationMethod3");
 
-//input the size of the List
-inputholderElement.addEventListener("click", () => {
-  let listSize = Number(inputholderElement.value);
-  generateElement.addEventListener("click", () => {
-    //generate a random arry with size = listSize
-    let arrayElement = generateRandomArray(listSize);
-    // for (let i = 0; i < arrayElement.length; i++) {
-    //   console.log(`a(${i}) = ${arrayElement[i]}`);
-    // }
-    inputdataElement.value = arrayElement;
-    inputdataElement.textContent = arrayElement;
-    console.log("Random array", inputdataElement.value);
-    divideInputDataElement.value = [...arrayElement];
-  });
+//generate a random array with size = arrayDimension
+generateElement.addEventListener("click", () => {
+  let arrayDimension = Number(inputholderElement.value);
+  let arrayElement = generateRandomArray(arrayDimension);
+  inputdataElement.value = arrayElement;
+  inputdataElement.textContent = arrayElement;
+  console.log("Random array", inputdataElement.value);
+  divideInputDataElement.value = [...arrayElement];
+  //To keep a clone copy of the original array
 });
 
 sortBTNElement.addEventListener("click", () => {
   let arr = inputdataElement.value;
   let arrCopy = [...inputdataElement.value];
   let sortedArray = [];
-  //sort the array: arr
+  //Pseudo Selection Sorting the array
   sortedArray = sortArray(arr);
   sortListElement.textContent = sortedArray.arr;
   nb_comparisonElement.textContent = sortedArray.numberComparison;
@@ -64,9 +59,8 @@ sortBTNElement.addEventListener("click", () => {
   nb_operationElement.textContent =
     Number(sortedArray.numberComparison) + Number(sortedArray.numberSwap);
 
-  //add the new sorting method here:
+  //Selction Sorting Method here:
   let sortedArrayBySecondMethod = [];
-  // console.log("Copy of the array:", Array.of(arrCopy));
   sortedArrayBySecondMethod = sortArrayBySelection(arrCopy);
   console.log("sorted copy 2end Method: ", sortedArrayBySecondMethod);
 
