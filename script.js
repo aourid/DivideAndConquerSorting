@@ -1,5 +1,5 @@
 //******************************************************************************//
-// Challenge: Sorting based on Divide and Conquer                                                       //
+// Challenge: Sorting based on Divide and Conquer                               //
 // Date: January 25th, 2023                                                     //
 // Author: Sidi M. Aourid                                                       //
 // Step 1: Generate a Random integer array:             generateRandomArray(n)  //
@@ -20,6 +20,8 @@ const generateElement = document.querySelector(".generateBTN");
 const sortBTNElement = document.querySelector(".sortBTN");
 const divideBTNElement = document.querySelector(".divideBTN");
 const sortListElement = document.querySelector(".sortList");
+const mergeElement = document.querySelector(".merge");
+const mergedataElement = document.querySelector(".mergedata");
 
 const nb_comparisonElement = document.querySelector(".comparison");
 const nb_swapElement = document.querySelector(".swap");
@@ -36,19 +38,16 @@ const nb_operationMethod3Element = document.querySelector(".operationMethod3");
 
 //input the size of the List
 inputholderElement.addEventListener("click", () => {
-  // console.log(inputholderElement.value);
   let listSize = Number(inputholderElement.value);
-  console.log("List size: ", listSize, typeof listSize);
   generateElement.addEventListener("click", () => {
-    console.log("Generate a random list");
+    //generate a random arry with size = listSize
     let arrayElement = generateRandomArray(listSize);
-    console.log("array element type:", arrayElement, typeof arrayElement);
     // for (let i = 0; i < arrayElement.length; i++) {
     //   console.log(`a(${i}) = ${arrayElement[i]}`);
     // }
     inputdataElement.value = arrayElement;
     inputdataElement.textContent = arrayElement;
-    console.log("..... Finally this element", inputdataElement.value);
+    console.log("Random array", inputdataElement.value);
     divideInputDataElement.value = [...arrayElement];
   });
 });
@@ -57,25 +56,18 @@ sortBTNElement.addEventListener("click", () => {
   let arr = inputdataElement.value;
   let arrCopy = [...inputdataElement.value];
   let sortedArray = [];
-
-  console.log("Array to sort: ", arr, typeof arr);
-  console.log("array now:", Array.of(arr));
-
-  console.log("****************************************");
+  //sort the array: arr
   sortedArray = sortArray(arr);
   sortListElement.textContent = sortedArray.arr;
   nb_comparisonElement.textContent = sortedArray.numberComparison;
   nb_swapElement.textContent = sortedArray.numberSwap;
   nb_operationElement.textContent =
     Number(sortedArray.numberComparison) + Number(sortedArray.numberSwap);
-  console.log(sortListElement.textContent);
 
   //add the new sorting method here:
   let sortedArrayBySecondMethod = [];
-  console.log("****************************************");
-  console.log("Start Second Method");
-  console.log("Copy of the array:", Array.of(arrCopy));
-  sortedArrayBySecondMethod = sortArrayBasedOnMinInsertion(arrCopy);
+  // console.log("Copy of the array:", Array.of(arrCopy));
+  sortedArrayBySecondMethod = sortArrayBySelection(arrCopy);
   console.log("sorted copy 2end Method: ", sortedArrayBySecondMethod);
 
   nb_comparisonMethod2Element.textContent =
@@ -85,31 +77,34 @@ sortBTNElement.addEventListener("click", () => {
     Number(sortedArrayBySecondMethod.numberComparison) +
     Number(sortedArrayBySecondMethod.numberSwap);
 });
-
+//Divide and Sort  sub arrays
 divideBTNElement.addEventListener("click", () => {
   // let arrayOriginal = [...inputdataElement.value];
-  console.log("---------------------***********----------------------------");
-  console.log("Original array: ", divideInputDataElement.value);
+  console.log(
+    "-----------------------------------------------------------------"
+  );
+  console.log(
+    "***    S t a r t  t h e  D i v i d e  a n d  C o n q u e r   ***"
+  );
+  console.log(
+    "-----------------------------------------------------------------"
+  );
+
+  console.log("*** Original array: ", divideInputDataElement.value);
   let subarraysize = Number(subarraySizeElement.value);
+  if (subarraysize === 0) subarraysize = 1; //To avoid division by 0
   let dividedArray = arrDivide(divideInputDataElement.value, subarraysize);
   console.log("Divide the Array", dividedArray);
-  console.log(
-    "################## S O R T  E A C H  S U B  A R R A Y ########################"
-  );
+  console.log("******** S O R T  E A C H  S U B  A R R A Y ********");
   let numberOfsubarrays = dividedArray.length;
   let totalSwap = 0;
   let totalComparison = 0;
   let tmpArr = {};
   for (let i = 0; i < numberOfsubarrays; i++) {
-    console.log(` ..... sort of sub arrays:${i} , ${dividedArray[i]}`);
+    // console.log(` ..... sort of sub arrays:${i} , ${dividedArray[i]}`);
     tmpArr = sortArray(dividedArray[i]);
     totalSwap += tmpArr.numberSwap;
     totalComparison += tmpArr.numberComparison;
-    console.log(
-      "    -->  Info of sub subarray:",
-      tmpArr.numberSwap,
-      tmpArr.numberComparison
-    );
   }
   console.log("Sub arrays after sorting", dividedArray);
   console.log(
@@ -121,24 +116,25 @@ divideBTNElement.addEventListener("click", () => {
   nb_operationMethod3Element.textContent =
     Number(totalComparison) + Number(totalSwap);
 
-  //To complete: Merge has tobe done with a click of merge
-
   let constructedArray = "[";
   let mergeSubLists = [];
   for (let i = 0; i < dividedArray.length; i++) {
-    console.log(`Element N: ${i}:`, dividedArray[i]);
+    // console.log(`Element N: ${i}:`, dividedArray[i]);
     // print(dividedArray[i]);
     constructedArray += `[${dividedArray[i]}],`;
     mergeSubLists = mergeArrays(mergeSubLists, dividedArray[i]);
   }
   divideInputDataElement.textContent = constructedArray + "]";
   console.log(mergeSubLists);
+  mergeElement.addEventListener("click", () => {
+    mergedataElement.textContent = mergeSubLists;
+  });
 });
 
 /////////////////////////////////////////////////////////////////////////
 // Method 1: Sort an Array, by swaping between a Pivot and any number less
 // than the pivot
-// return the sorted array and outputs the number of swap and number of
+// return an object of: the sorted array, the number of swap and number of
 // comparison
 /////////////////////////////////////////////////////////////////////////
 
@@ -156,9 +152,9 @@ function sortArray(arr) {
     }
   }
   console.log(
-    `Number of Elements: ${
+    `  ****   Number of Elements: ${
       arr.length
-    } and the number of swap is: ${numberSwap} and Number of Comparison is: ${numberComparison} ==> Total is: ${
+    }      Number of swaps:  ${numberSwap}       Number of Comparisons:  ${numberComparison}    ==> Total:  ${
       numberSwap + numberComparison
     }`
   );
@@ -171,7 +167,7 @@ function sortArray(arr) {
 // comparison
 /////////////////////////////////////////////////////////////////////////
 
-function sortArrayBasedOnMinInsertion(arr) {
+function sortArrayBySelection(arr) {
   // console.log(arr.length);
   let numberSwap = 0;
   let numberComparison = 0;
@@ -196,12 +192,13 @@ function sortArrayBasedOnMinInsertion(arr) {
     }
   }
   console.log(
-    `Number of Elements: ${
+    `  ****   Number of Elements: ${
       arr.length
-    } and the number of swap is: ${numberSwap} and Number of Comparison is: ${numberComparison} ==> Total is: ${
+    }      Number of swaps:  ${numberSwap}       Number of Comparisons:  ${numberComparison}    ==> Total:  ${
       numberSwap + numberComparison
     }`
   );
+
   return { arr, numberSwap, numberComparison };
 }
 
@@ -232,7 +229,8 @@ function mergeArrays(a, b) {
   //     return a - b;
   //   })
   // );
-  console.log(a[0], b[0]);
+  // console.log(a[0], b[0]);
+
   let c = [];
   let small = 0;
   while (a.length !== 0 && b.length !== 0) {
@@ -250,7 +248,6 @@ function mergeArrays(a, b) {
 //   each subarrays has dimension subarraySize as a parameter
 /////////////////////////////////////////////////////////////////////////
 function arrDivide(arr, subarrSize) {
-  console.log("Original array dimension", arr.length);
   subArrayDimension = subarrSize; //This is a parameter. It can be fixed at any small value
   let numberOfPartition = arr.length / subArrayDimension;
   const arrSliced = [];
