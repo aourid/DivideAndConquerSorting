@@ -53,16 +53,15 @@ To illustrate the merge function, let's consider the following example:
 
 $a = [1, 3, 5, 6]$ , $b = [2, 3, 4, 5]$
 
-so, $ c[0] = min(a[0], b[0]) = min(1, 2) = 1 $.
+so, $c[0] = min(a[0], b[0]) = min(1, 2) = 1$.
 So, we append 1 in c and we remove it from a.
 
 $\Rightarrow$
 $a = [3, 5, 6]$ and $b = [2, 3, 4, 5]$.
 
-At the second step, $ c[1] = min(a[0], b[0]) = min(3, 2) = 2 $. In the same manner, we append 2 in c and we remove it from b. Which result to:
-
+At the second step, $c[1] = min(a[0], b[0]) = min(3, 2) = 2$. In the same manner, we append 2 in c and we remove it from b. Which result to:
 $a = [3, 5, 6]$ and $b = [3, 4, 5]$.
 
-We repeat the same process until a or b becomes empty, then we append the remaining elements into c from the non empty list.
+We repeat the same process until a or b becomes empty. In this case, we append the remaining elements into c from the non empty list.
 
 At the end c will be $[1, 2, 3, 3, 4, 5, 5, 6]$.
