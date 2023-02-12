@@ -16,15 +16,16 @@ But our concern here, is to show that by dividing the original array into small 
 
 Before doing that, we can already improve the first method by reducing the number of swapping. Since, the total number $T_n$ is always the same, by reducing the number of swapping, it will increase the number of comparison and vice versa.
 
-### Variant 1: Swap with the next small element.
+### Variant 1: Swap with the next smaller element.
 
-In this method, we swap any time we found a small element. This is not efficient, but we don't have to keep track of any index
+In this variant, for each element (i.e. called _current element_) in the array, we try to find the _first smaller_ element among the remaining element in the array. If the current element is not smaller, we then swap. In other way, we swap any time we found a smaller element than a current element. This is not efficient, but we don't have to keep track of any index.
 
-### Variant 2: Swap with the smallest element.
+### Variant 2: Selection Sorthing Algorithm.
 
-In this variant, we repeatedly select the smallest element and swap it with first element of the remaining list. In this case we have to save the index of the smallest element. (I am not giving all details of the Selection Algorithm. Many references are available on the internet).
+This is the classical sorting algorithm, where the array is divided into two parts: a sorted sub array and the remaning unsorted sub array.
+The algorithm proceeds by repeatedly select the smallest element from unsorted part and swap it with first element of the remaining part (unsorted sub array). In this case we have to save the index of the smallest element to perform the swapping. (For more details, many references are available on the internet).
 
-As we can notice on the simulation, the number of swapping in the second variant is smaller than the one from variant 1. However, since we will divide the original data into a very small subarrays, we will consider the variant 1, (with very small swapping and we don't have to keep track of any index for the smallest element)
+As we can notice on the simulation, the number of swapping in the second variant is smaller than the one from variant 1. However, since we will divide the original data into a very small subarrays, we will consider the variant 1, since the number of swapping is not significant and we don't have to keep track for any index for the minimum.
 
 ## II. Divide, Sort and Merge
 
