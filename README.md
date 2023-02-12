@@ -41,23 +41,28 @@ Once all sub arrays are sorted, then we merge them one by one to reconstruct the
 
 **_c = merge(a, b):_**
 
+At iteration: _k_
+
 - Take $c[k] = min(a[0], b[0])$,
-- remove it from its correspondig sub array (a or b),
+- Remove it from its correspondig sub array (a or b),
 - Repeat the process until a or b is empty
 
 #### Example:
 
-$c = merge(a, b)$
+To illustrate the merge function, let's consider the following example:
 
-where: $a = [1, 3, 5, 6]$ , $b = [2, 3, 4, 5]$
+$a = [1, 3, 5, 6]$ , $b = [2, 3, 4, 5]$
 
-$$min(a[0], b[0]) = min(1, 2) = 1 $$
-we append 1 in c and we remove it from a
+so, $ c[0] = min(a[0], b[0]) = min(1, 2) = 1 $.
+So, we append 1 in c and we remove it from a.
 
 $\Rightarrow$
-$a = [3, 5, 6]$ and $b = [2, 3, 4, 5]$
+$a = [3, 5, 6]$ and $b = [2, 3, 4, 5]$.
 
-We repeat the same process until a or b becomes empty, them we append the remaining elements into c from the non empty list.
+At the second step, $ c[1] = min(a[0], b[0]) = min(3, 2) = 2 $. In the same manner, we append 2 in c and we remove it from b. Which result to:
 
-At the end c will be $[1, 2, 3, 3, 4, 5, 5, 6]$ that will be merged with another sub array b let's say: b = [1, 3, 5, 6] which result to:
-$$c = [1, 1, 2, 3, 3, 3, 4, 5, 5, 5, 6, 6]$$
+$a = [3, 5, 6]$ and $b = [3, 4, 5]$.
+
+We repeat the same process until a or b becomes empty, then we append the remaining elements into c from the non empty list.
+
+At the end c will be $[1, 2, 3, 3, 4, 5, 5, 6]$.
