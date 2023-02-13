@@ -11,16 +11,17 @@
     <div class="container">
       <h1 class="title">Sorting Algorithm</h1>
       <h2 class="randomList">Generate a Random List</h2>
-      <h2 class="listSize">
-        Give a size of a list
+      <form action="">
+        <label for="name">Give the size of your array </label>
         <input
           class="inputholder"
           type="number"
-          placeholder="Size of your list"
+          placeholder="Size of your array "
+          value="1"
         />
-        <button class="generateBTN">Generate</button>
-      </h2>
-      <h2 class="inputdata">List = [3, 2, 2, 6, 1]</h2>
+        <button class="generateBTN" type="button">Generate</button>
+      </form>
+      <h2 class="inputdata">[3, 6, 2, 1, 2]</h2>
 
       <!-- <h2>Input size of your list: <span class="Listsize">n</span></h2> -->
 
@@ -46,16 +47,17 @@
         </div>
       </div>
       <div class="divideAndConquer">
-        <h2 class="sort">Divide and Conquer Divide</h2>
-        Enter Size of the Sub Array:
-        <input
-          class="subarraySize"
-          type="number"
-          placeholder="Size of sub array "
-          value="1"
-        />
-        <button class="divideBTN" type="button">Divide and Sort</button>
-
+        <h2 class="sort">Divide and Conquer Paradigm</h2>
+        <form action="">
+          <label for="name"> Enter Size of the Sub Array:</label>
+          <input
+            class="subarraySize"
+            type="number"
+            placeholder="Size of sub array "
+            value="1"
+          />
+          <button class="divideBTN" type="button">Divide and Sort</button>
+        </form>
         <div class="sort Method3">
           <h2 class="titleMethod">Divide and Conquer Algorithm</h2>
           Number of Comparison: <span class="nb comparisonMethod3">0</span>
